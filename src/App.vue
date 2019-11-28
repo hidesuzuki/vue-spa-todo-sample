@@ -1,17 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header class="header">
+      <h1>todos</h1>
+      <input class="new-todo"
+             autofocus autocomplete="off"
+             placeholder="What needs to be done?"
+             v-model="newTodo"
+             @keyup.enter="addTodo" >
+    </header>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
   components: {
-    HelloWorld
+  },
+  data (){
+    return {
+      newTodo: ""
+    }
+  },
+  computed: {
+    todos(){
+      let todos = JSON.parse(localStorage.getItem('todos-vuejs'));
+      todos.forEach(function (todo, index){
+        todo.id = index;
+      });
+      todoStrage.uid = todos.length;
+      return null
+    }
+  },
+  methods: {
+    addTodo() {
+      let value = this.newTodo && this.newTodo.trim();
+      if(!value){
+        return;
+      }
+      this.todos.push();
+    }
   }
 }
 </script>
