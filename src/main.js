@@ -120,7 +120,7 @@ let app = new Vue({
 });
 
 function onHashChange() {
-  let visibility =~ window.location.hash.replace(/#\/?/, '');
+  let visibility = window.location.hash.replace(/#\/?/, '');
   if(filters[visibility]){
     app.visibility = visibility;
   } else {
