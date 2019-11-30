@@ -22,14 +22,14 @@ export default {
     }
   },
   computed: {
-    todos(){
-      let todos = JSON.parse(localStorage.getItem('todos-vuejs'));
-      todos.forEach(function (todo, index){
-        todo.id = index;
-      });
-      todoStrage.uid = todos.length;
-      return null
-    }
+    // todos(){
+    //   let todos = JSON.parse(localStorage.getItem('todos-vuejs'));
+    //   todos.forEach(function (todo, index){
+    //     todo.id = index;
+    //   });
+    //   todoStrage.uid = todos.length;
+    //   return null
+    // }
   },
   methods: {
     addTodo() {
