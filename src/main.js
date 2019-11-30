@@ -109,6 +109,13 @@ let app = new Vue({
     removeCompleted: function(){
       this.todos = filters.active(this.todos)
     }
+  },
+  directives: {
+    'todo-focus': function(el, binding) {
+      if(binding.value){
+        el.focus()
+      }
+    }
   }
 
 });
