@@ -117,7 +117,19 @@ let app = new Vue({
       }
     }
   }
-
 });
+
+function onHashChange() {
+  let visibility =~ window.location.hash.replace(/#\/?/, '');
+  if(filters[visibility]){
+    app.visibility = visibility;
+  } else {
+    window.location.hash = '';
+    app.visibility = 'all';
+  }
+}
+
+window.addEventListener('hashchange', onHashChange);
+onHashChange();
 
 app.$mount('#app')
