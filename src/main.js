@@ -132,4 +132,4 @@ function onHashChange() {
 window.addEventListener('hashchange', onHashChange);
 onHashChange();
 
-app.$mount('#app')
+app.$mount('#app');
