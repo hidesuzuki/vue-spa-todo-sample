@@ -1,55 +1,58 @@
 <template>
   <div id="app">
-    <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo"
-             autofocus autocomplete="off"
-             placeholder="What needs to be done?"
-             v-model="newTodo"
-             @keyup.enter="addTodo" >
-    </header>
+    <table>
+      <thead>
+      <tr>
+        <th class="id">ID</th>
+        <th class="comment">コメント</th>
+        <th class="state">状態</th>
+        <th class="button">-</th>
+      </tr>
+      <tr v-for="item in todos" v-bind:key="item.id">
+        <th> {{ item.id }}</th>
+        <td> {{item.comment }}</td>
+        <td class="state">
+          <button>{{ item.state }}</button>
+        </td>
+        <td class="button">
+          <button>削除</button>
+        </td>
+      </tr>
+      </thead>
+    </table>
+    <h2>新しい作業の追加</h2>
+    <form class="add-form" v-on:submit.prevent="doAdd">
+      <label for="newComment" value="ss" />
+      <input id="newComment" type="text" placeholder="Todos" v-bind:title="comment">
+      <button type="submit">追加</button>
+    </form>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  components: {
-  },
-  data (){
-    return {
-      newTodo: ""
-    }
-  },
-  computed: {
-    // todos(){
-    //   let todos = JSON.parse(localStorage.getItem('todos-vuejs'));
-    //   todos.forEach(function (todo, index){
-    //     todo.id = index;
-    //   });
-    //   todoStrage.uid = todos.length;
-    //   return null
-    // }
-  },
-  methods: {
-    addTodo() {
-      let value = this.newTodo && this.newTodo.trim();
-      if(!value){
-        return;
+  export default {
+    name: 'app',
+    data() {
+      return {
+        todos: [{id: 1, comment: "コメント", state: "状態"}],
+        comment: 'こここ',
       }
-      this.todos.push();
+    },
+    methods: {
+      doAdd() {
+
+      }
     }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>
