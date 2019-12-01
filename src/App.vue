@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <h2>新しい作業の追加</h2>
+    <label for="newComment">コメント</label>
+    <input id="newComment" v-model="comment" placeholder="Todo" >
+    <button @click="doAdd">追加</button>
     <table>
       <thead>
       <tr>
@@ -20,10 +24,6 @@
       </tr>
       </thead>
     </table>
-    <h2>新しい作業の追加</h2>
-    <label for="newComment">コメント</label>
-    <input id="newComment" v-model="comment" placeholder="Todos" >
-    <button @click="doAdd">追加</button>
   </div>
 </template>
 
@@ -32,13 +32,17 @@
     name: 'app',
     data() {
       return {
-        todos: [{id:1, comment:"sample", state: 0}],
+        todos: [],
         comment: "",
       }
     },
     mounted(){
-      if(localStorage.todos){
-        this.todos = localStorage.todos;
+      if(localStorage.getItem('todos')){
+        try{
+          this.todos = JSON.parse(localStorage.getItem('todos'));
+        } catch(e) {
+          localStorage.removeItem('todos');
+        }
       } else {
         this.todos = [];
       }
@@ -49,7 +53,12 @@
           return;
         }
 
-        let lastId = this.todos.slice(-1)[0].id;
+        let lastObj = this.todos.slice(-1)[0];
+        let lastId = 1;
+        if(lastObj){
+          lastId = lastObj.id;
+          lastId++;
+        }
 
         this.todos.push({
           id: lastId,
@@ -58,6 +67,11 @@
         });
         localStorage.todos = this.todos;
         this.comment = "";
+        this.saveTodos();
+      },
+      saveTodos(){
+        const parsed = JSON.stringify(this.todos);
+        localStorage.setItem('todos', parsed);
       },
       doChangeState(item){
         item.state = item.state ? 0 : 1;
