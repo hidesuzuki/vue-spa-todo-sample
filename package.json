@@ -10,7 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
-    "serialize-javascript": "^2.1.1"
+    "serialize-javascript": "^3.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.2",
